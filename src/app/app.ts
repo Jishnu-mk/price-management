@@ -1,4 +1,4 @@
-import { Component, signal, VERSION } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { PricingService } from './services/pricing.service';
 import { FrPricingTableComponent } from './components/pricing-table/fr-pricing-table.component';
 import { FlatPricingTableComponent } from './components/flat-pricing/flat-pricing-table.component';
@@ -13,8 +13,6 @@ import { FrPricing, FlatPricing, AdditionalCharges } from './models/pricing.mode
   styleUrl: './app.scss'
 })
 export class App {
-  readonly angularVersion = VERSION.major + '.' + VERSION.minor;
-
   // Track which accordion panels are open (open by default: first flat panel)
   openPanels = signal<Set<string>>(new Set(['default']));
 

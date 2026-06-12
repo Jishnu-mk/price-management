@@ -24,7 +24,7 @@ export class PricingService {
   loadPricing(): void {
     this._isLoading.set(true);
     this._error.set(null);
-    this.http.get<PricingData>('/data/pricing.json').subscribe({
+    this.http.get<PricingData>('data/pricing.json').subscribe({
       next: (data) => {
         this._rawData.set(data);
         this._isLoading.set(false);
