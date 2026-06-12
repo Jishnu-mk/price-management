@@ -36,10 +36,6 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## GitHub Pages
-
-The `docs/` folder contains the production build served by GitHub Pages. Configure Pages to deploy from the `main` branch and `/docs` folder.
-
 ## Running unit tests
 
 To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
