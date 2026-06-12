@@ -1,0 +1,165 @@
+<div class="app-shell">
+  <header class="app-header">
+    <div class="header-brand">
+      <span class="brand-name">Pricing Management</span>
+      <span class="brand-sub">Embroidered Specials · RUI</span>
+    </div>
+    <span class="version-badge">Angular {{ angularVersion }}</span>
+  </header>
+
+  <main class="app-main">
+    @if (pricingService.isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading pricing data…</p>
+      </div>
+    } @else if (pricingService.error()) {
+      <div class="error-state">
+        <span>⚠ {{ pricingService.error() }}</span>
+        <button (click)="pricingService.loadPricing()">Retry</button>
+      </div>
+    } @else if (pricingService.ruiData(); as rui) {
+
+      <!-- DEFAULT -->
+      <div class="accordion-panel">
+        <button class="accordion-header" (click)="toggle('default')">
+          <span class="accordion-title">DEFAULT</span>
+          <span class="accordion-toggle">{{ isOpen('default') ? '−' : '+' }}</span>
+        </button>
+        @if (isOpen('default')) {
+          <div class="accordion-body">
+            <app-flat-pricing-table
+              [flatData]="rui.default"
+              name="default"
+              (dataChanged)="onFlatChanged('default', $event)"
+            />
+          </div>
+        }
+      </div>
+
+      <!-- FANCY -->
+      <div class="accordion-panel">
+        <button class="accordion-header" (click)="toggle('fancy')">
+          <span class="accordion-title">FANCY</span>
+          <span class="accordion-toggle">{{ isOpen('fancy') ? '−' : '+' }}</span>
+        </button>
+        @if (isOpen('fancy')) {
+          <div class="accordion-body">
+            <app-flat-pricing-table
+              [flatData]="rui.fancy"
+              name="fancy"
+              (dataChanged)="onFlatChanged('fancy', $event)"
+            />
+          </div>
+        }
+      </div>
+
+      <!-- HI VIS -->
+      <div class="accordion-panel">
+        <button class="accordion-header" (click)="toggle('hi_vis')">
+          <span class="accordion-title">HI VIS</span>
+          <span class="accordion-toggle">{{ isOpen('hi_vis') ? '−' : '+' }}</span>
+        </button>
+        @if (isOpen('hi_vis')) {
+          <div class="accordion-body">
+            <app-flat-pricing-table
+              [flatData]="rui.hi_vis"
+              name="hi_vis"
+              (dataChanged)="onFlatChanged('hi_vis', $event)"
+            />
+          </div>
+        }
+      </div>
+
+      <!-- INSERTS -->
+      <div class="accordion-panel">
+        <button class="accordion-header" (click)="toggle('inserts')">
+          <span class="accordion-title">INSERTS</span>
+          <span class="accordion-toggle">{{ isOpen('inserts') ? '−' : '+' }}</span>
+        </button>
+        @if (isOpen('inserts')) {
+          <div class="accordion-body">
+            <app-flat-pricing-table
+              [flatData]="rui.inserts"
+              name="inserts"
+              (dataChanged)="onFlatChanged('inserts', $event)"
+            />
+          </div>
+        }
+      </div>
+
+      <!-- REFLECTIVE -->
+      <div class="accordion-panel">
+        <button class="accordion-header" (click)="toggle('reflective')">
+          <span class="accordion-title">REFLECTIVE</span>
+          <span class="accordion-toggle">{{ isOpen('reflective') ? '−' : '+' }}</span>
+        </button>
+        @if (isOpen('reflective')) {
+          <div class="accordion-body">
+            <app-flat-pricing-table
+              [flatData]="rui.reflective"
+              name="reflective"
+              (dataChanged)="onFlatChanged('reflective', $event)"
+            />
+          </div>
+        }
+      </div>
+
+      <!-- FANCY INSERTS -->
+      <div class="accordion-panel">
+        <button class="accordion-header" (click)="toggle('fancy_inserts')">
+          <span class="accordion-title">FANCY INSERTS</span>
+          <span class="accordion-toggle">{{ isOpen('fancy_inserts') ? '−' : '+' }}</span>
+        </button>
+        @if (isOpen('fancy_inserts')) {
+          <div class="accordion-body">
+            <app-flat-pricing-table
+              [flatData]="rui.fancy_inserts"
+              name="fancy_inserts"
+              (dataChanged)="onFlatChanged('fancy_inserts', $event)"
+            />
+          </div>
+        }
+      </div>
+
+      <!-- FR -->
+      <div class="accordion-panel">
+        <button class="accordion-header" (click)="toggle('fr')">
+          <span class="accordion-title">FR</span>
+          <span class="accordion-toggle">{{ isOpen('fr') ? '−' : '+' }}</span>
+        </button>
+        @if (isOpen('fr')) {
+          <div class="accordion-body">
+            <app-fr-pricing-table
+              [frData]="rui.fr"
+              (dataChanged)="onFrChanged($event)"
+            />
+          </div>
+        }
+      </div>
+
+      <!-- ADDITIONAL CHARGE -->
+      <div class="accordion-panel">
+        <button class="accordion-header" (click)="toggle('charges')">
+          <span class="accordion-title">ADDITIONAL CHARGE</span>
+          <span class="accordion-toggle">{{ isOpen('charges') ? '−' : '+' }}</span>
+        </button>
+        @if (isOpen('charges')) {
+          <div class="accordion-body">
+            <app-additional-charges
+              [charges]="rui.additional_charge"
+              title="RUI"
+              (dataChanged)="onChargesChanged('rui', $event)"
+            />
+            <app-additional-charges
+              [charges]="rui.fr.additional_charge"
+              title="FR"
+              (dataChanged)="onChargesChanged('fr', $event)"
+            />
+          </div>
+        }
+      </div>
+
+    }
+  </main>
+</div>

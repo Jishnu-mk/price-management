@@ -1,0 +1,56 @@
+<div class="flat-pricing">
+  <div class="toolbar">
+    <button class="btn-add-col" (click)="addColumn()">+ Add Column</button>
+  </div>
+
+  <div class="table-wrap">
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th class="label-cell"></th>
+          @for (i of indices(flatModel().tiers.length); track i) {
+            <th class="tier-head">
+              <button class="del-col" (click)="removeColumn(i)" title="Remove column">×</button>
+              <input
+                type="text"
+                class="tier-input"
+                [formField]="flatForm.tiers[i].value"
+              />
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Price</td>
+          @for (i of indices(flatModel().prices.length); track i) {
+            <td class="price-cell">
+              <input
+                type="text"
+                class="price-input"
+                [formField]="flatForm.prices[i].value"
+                [class.is-dropout]="flatModel().prices[i].value === 'dropout'"
+                [class.is-na]="flatModel().prices[i].value === 'n/a'"
+              />
+            </td>
+          }
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="discount-row">
+    <label class="field-label">Discount <span class="required">*</span></label>
+    <input
+      type="number"
+      class="discount-input"
+      [value]="flatData().discount"
+      (change)="onDiscountChange($any($event.target).value)"
+    />
+  </div>
+
+  <div class="action-row">
+    <button class="btn btn-primary" (click)="saveChanges()">Save Changes</button>
+    <button class="btn btn-ghost" (click)="reset()">Reset</button>
+  </div>
+</div>

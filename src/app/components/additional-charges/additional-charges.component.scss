@@ -1,0 +1,137 @@
+.charges-section {
+  padding: 20px 24px;
+  background: #ffffff;
+}
+
+.section-sub-header {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7a99;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #eef1f6;
+}
+
+/* ── Charge group ── */
+.charge-group {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eef1f6;
+
+  &:last-of-type { border-bottom: none; margin-bottom: 0; }
+}
+
+.charge-group-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a2740;
+  margin-bottom: 10px;
+}
+
+/* ── Scalar field row ── */
+.field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+  max-width: 240px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.required { color: #e53e3e; margin-left: 2px; }
+
+.field-input {
+  padding: 8px 12px;
+  border: 1px solid #c4cdd8;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #1a2740;
+  background: #ffffff;
+  width: 100%;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &:hover  { border-color: #a0aec0; }
+  &:focus  {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  }
+}
+
+/* ── Paired table ── */
+.paired-table-wrap {
+  margin-bottom: 8px;
+  overflow-x: auto;
+}
+
+.paired-table {
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 260px;
+
+  th {
+    background: #eef2f8;
+    color: #4a5568;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 10px;
+    border: 1px solid #d0d7e3;
+    text-align: left;
+    text-transform: capitalize;
+  }
+
+  td {
+    border: 1px solid #d0d7e3;
+    padding: 4px 6px;
+  }
+}
+
+.cell-input {
+  display: block;
+  width: 100%;
+  min-width: 100px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 13px;
+  background: transparent;
+  color: #1a2740;
+  text-align: center;
+  transition: border-color 0.15s;
+
+  &:hover { border-color: #c4cdd8; background: #f7f9fc; }
+  &:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  }
+}
+
+/* ── Save bar ── */
+.save-bar {
+  padding-top: 16px;
+  border-top: 1px solid #eef1f6;
+  margin-top: 4px;
+}
+
+.btn-save {
+  padding: 8px 24px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: #1d4ed8; }
+}

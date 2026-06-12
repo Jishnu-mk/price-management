@@ -1,0 +1,49 @@
+<div class="fr-pricing">
+  <div class="toolbar">
+    <button class="btn-add-col" (click)="addColumn()">+ Add Column</button>
+  </div>
+
+  <div class="table-wrap">
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th class="size-head sticky-col">Size (in²)</th>
+          @for (i of indices(frModel().itemTiers.length); track i) {
+            <th class="tier-head">
+              <button class="del-col" (click)="removeColumn(i)" title="Remove">×</button>
+              <span class="tier-label">{{ frModel().itemTiers[i].value }}</span>
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (ri of indices(frModel().rows.length); track frModel().rows[ri].size) {
+          <tr>
+            <td class="size-cell sticky-col">{{ frModel().rows[ri].size }}"</td>
+            @for (ci of indices(frModel().rows[ri].prices.length); track ci) {
+              <td class="price-cell">
+                <input
+                  type="text"
+                  class="price-input"
+                  [formField]="frForm.rows[ri].prices[ci].value"
+                  [class.is-dropout]="frModel().rows[ri].prices[ci].value === 'dropout'"
+                  [class.is-na]="frModel().rows[ri].prices[ci].value === 'n/a'"
+                />
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="discount-row">
+    <label class="field-label">Discount <span class="required">*</span></label>
+    <input type="number" class="discount-input" [value]="frData().discount" readonly />
+  </div>
+
+  <div class="action-row">
+    <button class="btn btn-primary" (click)="saveChanges()">Save Changes</button>
+    <button class="btn btn-ghost" (click)="resetToOriginal()">Reset</button>
+  </div>
+</div>
