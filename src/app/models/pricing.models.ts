@@ -79,7 +79,6 @@ export interface PricingData {
   };
 }
 
-// ---- UI Models ----
 
 export type PricingType = 'fr' | 'flat' | 'additional_charge';
 

@@ -1,70 +1,75 @@
 <div class="charges-section">
-  @if (title()) {
-    <div class="section-sub-header">{{ title() }}</div>
-  }
+  <div class="section-sub-header">{{ title() | titlecase }}</div>
 
-  @for (entry of entries(); track entry.key) {
+  @for (entry of chargeModel().entries; track entry.key; let ei = $index) {
     <div class="charge-group">
       <div class="charge-group-title">{{ entry.label }}</div>
 
-      @for (field of entry.fields; track $index) {
+      @if (entry.field.isPaired === 'false') {
+        <!-- ── Scalar field ── -->
+        <div class="field-row">
+          <label class="field-label">
+            {{ entry.field.label | titlecase }}
+            <span class="required">*</span>
+          </label>
+          <input
+            class="field-input"
+            type="text"
+            [formField]="chargeForm.entries[ei].field.value"
+          />
+          @if (chargeForm.entries[ei].field.value().touched() &&
+               chargeForm.entries[ei].field.value().invalid()) {
+            <span class="required">
+              {{ chargeForm.entries[ei].field.value().errors()[0]?.message }}
+            </span>
+          }
+        </div>
 
-        @if (field.kind === 'scalar') {
-          <div class="field-row">
-            <label class="field-label">{{ asScalar(field).key | titlecase }} <span class="required">*</span></label>
-            <input
-              type="text"
-              class="field-input"
-              [(ngModel)]="asScalar(field).value"
-              (blur)="emitAll()"
-            />
-          </div>
-        }
-
-        @if (field.kind === 'paired') {
-          <div class="paired-table-wrap">
-            <table class="paired-table">
-              <thead>
-                <tr>
-                  @if (asPaired(field).labelA) {
-                    <th>{{ asPaired(field).labelA | titlecase }}</th>
-                  }
-                  <th>{{ asPaired(field).labelB | titlecase }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (row of asPaired(field).rows; track $index) {
-                  <tr>
-                    @if (asPaired(field).labelA) {
-                      <td>
-                        <input
-                          type="text"
-                          class="cell-input"
-                          [(ngModel)]="row.valueA"
-                          (blur)="emitAll()"
-                        />
-                      </td>
-                    }
-                    <td>
-                      <input
-                        type="text"
-                        class="cell-input"
-                        [(ngModel)]="row.valueB"
-                        (blur)="emitAll()"
-                      />
-                    </td>
-                  </tr>
+      } @else {
+        <!-- ── Paired field ── -->
+        <div class="paired-table-wrap">
+          <table class="paired-table">
+            <thead>
+              <tr>
+                @if (entry.field.labelA) {
+                  <th>{{ entry.field.labelA | titlecase }}</th>
                 }
-              </tbody>
-            </table>
-          </div>
-        }
-
+                <th>{{ entry.field.labelB | titlecase }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                @if (entry.field.labelA) {
+                  <td>
+                    <input
+                      class="cell-input"
+                      type="text"
+                      [formField]="chargeForm.entries[ei].field.valueA"
+                    />
+                  </td>
+                }
+                <td>
+                  <input
+                    class="cell-input"
+                    type="text"
+                    [formField]="chargeForm.entries[ei].field.valueB"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       }
+
     </div>
   }
 
   <div class="save-bar">
-    <button class="btn-save" (click)="emitAll()">Save Changes</button>
+    <button
+      class="btn-save"
+      (click)="emitAll()"
+      [disabled]="chargeForm().invalid()">
+      Save Changes
+    </button>
   </div>
 </div>

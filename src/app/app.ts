@@ -13,7 +13,6 @@ import { FrPricing, FlatPricing, AdditionalCharges } from './models/pricing.mode
   styleUrl: './app.scss'
 })
 export class App {
-  // Track which accordion panels are open (open by default: first flat panel)
   openPanels = signal<Set<string>>(new Set(['default']));
 
   private state = signal<Record<string, unknown>>({});
